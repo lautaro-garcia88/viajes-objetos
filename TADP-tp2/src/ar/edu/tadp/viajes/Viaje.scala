@@ -74,12 +74,15 @@ class Viaje(var origen: Direccion, var destino: Direccion, var usuario: Usuario)
   }
 
   def calcularTiempo(): Double = {
-    var tiempoTotal: Double = ModuloTransporte.distanciaPie(origen, recorridoElegido.head.origen)
+    var tiempoTotal: Double = 0
+    var distancia: Double = ModuloTransporte.distanciaPie(origen, recorridoElegido.head.origen)
 
-    tiempoTotal = tiempoTotal + ModuloTransporte.distanciaPie(recorridoElegido.last.destino, destino)
+    tiempoTotal = 2.5 * distancia / 100
+    distancia = ModuloTransporte.distanciaPie(recorridoElegido.last.destino, destino)
+    tiempoTotal = tiempoTotal + 2.5 * distancia / 100
 
     for (unTramo <- recorridoElegido) {
-      tiempoTotal = tiempoTotal + unTramo.calcularDistancia()
+      tiempoTotal = tiempoTotal + unTramo.calcularTiempo()
     }
 
     if (!recorridoElegido.head.transporte.esIgual(recorridoElegido.last.transporte)) {

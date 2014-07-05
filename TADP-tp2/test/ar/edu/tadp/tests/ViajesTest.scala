@@ -21,6 +21,20 @@ class ViajesTest {
     var destino: Direccion = new Direccion("Bolivar", 1, "La Boca")
     var unViaje: Viaje = new Viaje(origen, destino, unUsuario)
     var recorrido: List[Tramo] = unViaje.armarRecorrido()
+    var tiempo: Double = unViaje.calcularTiempo()
+
+    Assert.assertEquals(1, recorrido.length)
+    Assert.assertTrue(recorrido.head.transporte.isInstanceOf[Colectivo])
+    Assert.assertEquals(30, tiempo)
+  }
+
+  @Test
+  def dosTramosTest() = {
+    var unUsuario: Usuario = new Usuario(new Discapacitado(), MenorCosto)
+    var origen: Direccion = new Direccion("Balcarce", 50, "La Boca")
+    var destino: Direccion = new Direccion("Bolivar", 1, "La Boca")
+    var unViaje: Viaje = new Viaje(origen, destino, unUsuario)
+    var recorrido: List[Tramo] = unViaje.armarRecorrido()
 
     Assert.assertEquals(1, recorrido.length)
     Assert.assertTrue(recorrido.head.transporte.isInstanceOf[Colectivo])

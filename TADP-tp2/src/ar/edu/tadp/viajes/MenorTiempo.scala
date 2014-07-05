@@ -30,7 +30,7 @@ object MenorTiempo extends Criterio {
     tiempoTotal = tiempoTotal + ModuloTransporte.distanciaPie(unRecorrido.last.destino, destino)
 
     for (unTramo <- unRecorrido) {
-      tiempoTotal = tiempoTotal + unTramo.calcularDistancia()
+      tiempoTotal = tiempoTotal + unTramo.calcularTiempo()
     }
 
     if (!unRecorrido.head.transporte.esIgual(unRecorrido.last.transporte)) {

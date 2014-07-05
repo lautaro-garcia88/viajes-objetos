@@ -25,7 +25,7 @@ object ModuloTransporte {
     return null
   }
 
-  def distanciaColectivo(linea: Int, dir1: Direccion, dir2: Direccion): Int = {
+  def distanciaColectivo(linea: Int, dir1: Direccion, dir2: Direccion): Double = {
     return 0
   }
 
