@@ -8,7 +8,7 @@ class Tren(var linea: String) extends Transporte {
     return distancia / 400 * 3
   }
 
-  override def calcularTarifa(origen: Direccion, destino: Direccion): Float = {
+  override def calcularTarifa(origen: Direccion, destino: Direccion): Double = {
     return 1
   }
 

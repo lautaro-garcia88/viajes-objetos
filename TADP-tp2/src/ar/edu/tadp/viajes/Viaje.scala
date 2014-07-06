@@ -1,13 +1,13 @@
 package ar.edu.tadp.viajes
 
 class Viaje(var origen: Direccion, var destino: Direccion, var usuario: Usuario) {
-  var recorridoElegido: List[Tramo] = null
+  var recorridoElegido: Recorrido = null
 
-  def armarRecorrido(): List[Tramo] = {
+  def armarRecorrido(): Recorrido = {
     var mediosCercaOrigen: List[TransporteCerca] = ModuloTransporte.mediosTransporteCerca(origen)
     var mediosCercaDestino: List[TransporteCerca] = ModuloTransporte.mediosTransporteCerca(destino)
     var mediosPosibles: List[TransporteCerca] = chequearMedios(mediosCercaOrigen, mediosCercaDestino)
-    var posiblesRecorridos: List[List[Tramo]] = List()
+    var posiblesRecorridos: List[Recorrido] = List()
     var unRecorrido: List[Tramo] = null
 
     if (mediosPosibles.isEmpty) {
@@ -16,12 +16,12 @@ class Viaje(var origen: Direccion, var destino: Direccion, var usuario: Usuario)
       for (a <- mediosPosibles) {
         unRecorrido = List()
         unRecorrido = crearTramo(mediosCercaDestino, a) :: unRecorrido
-        posiblesRecorridos = unRecorrido :: posiblesRecorridos
+        posiblesRecorridos = new Recorrido(unRecorrido) :: posiblesRecorridos
       }
     }
 
     if (posiblesRecorridos.isEmpty) { //Logica de combinacion
-      recorridoElegido = List()
+      recorridoElegido = null
     } else if (posiblesRecorridos.length == 1) {
       recorridoElegido = posiblesRecorridos.head
     } else {
@@ -31,9 +31,9 @@ class Viaje(var origen: Direccion, var destino: Direccion, var usuario: Usuario)
     return recorridoElegido
   }
 
-  private def buscarCombinacion(mediosCercaOrigen: List[TransporteCerca], mediosCercaDestino: List[TransporteCerca]): List[List[Tramo]] = {
+  private def buscarCombinacion(mediosCercaOrigen: List[TransporteCerca], mediosCercaDestino: List[TransporteCerca]): List[Recorrido] = {
     var direccionCombinacion: Direccion = null
-    var recorridos: List[List[Tramo]] = List()
+    var recorridos: List[Recorrido] = List()
     var unRecorrido: List[Tramo] = List()
     var unTramo: Tramo = null
     var medioTransporteCerca: List[TransporteCerca] = null
@@ -50,7 +50,7 @@ class Viaje(var origen: Direccion, var destino: Direccion, var usuario: Usuario)
           transporteElegidoFiltrado = medioTransporteCerca.filter(p => p.transporte.esIgual(unMedioDestino.transporte))
           unTramo = new Tramo(transporteElegidoFiltrado.head.transporte, transporteElegidoFiltrado.head.direccion, unMedioDestino.direccion)
           unRecorrido = unTramo :: unRecorrido
-          recorridos = unRecorrido :: recorridos
+          recorridos = new Recorrido(unRecorrido) :: recorridos
         }
       }
     }
@@ -65,29 +65,18 @@ class Viaje(var origen: Direccion, var destino: Direccion, var usuario: Usuario)
     return new Tramo(transporteElegido.transporte, medioPosible.direccion, transporteElegido.direccion)
   }
 
-  def calcularCosto(): Float = {
-    return 0
-  }
-
-  def calcularDistancia(): Double = {
-    return 0
+  def calcularCosto(): Double = {
+    return usuario.calcularDescuento(recorridoElegido)
   }
 
   def calcularTiempo(): Double = {
     var tiempoTotal: Double = 0
-    var distancia: Double = ModuloTransporte.distanciaPie(origen, recorridoElegido.head.origen)
+    var distancia: Double = ModuloTransporte.distanciaPie(origen, recorridoElegido.tramos.head.origen)
 
     tiempoTotal = 2.5 * distancia / 100
-    distancia = ModuloTransporte.distanciaPie(recorridoElegido.last.destino, destino)
+    distancia = ModuloTransporte.distanciaPie(recorridoElegido.tramos.last.destino, destino)
     tiempoTotal = tiempoTotal + 2.5 * distancia / 100
-
-    for (unTramo <- recorridoElegido) {
-      tiempoTotal = tiempoTotal + unTramo.calcularTiempo()
-    }
-
-    if (!recorridoElegido.head.transporte.esIgual(recorridoElegido.last.transporte)) {
-      tiempoTotal = tiempoTotal + recorridoElegido.head.transporte.calcularTiempoCombinacion(recorridoElegido.head.destino, recorridoElegido.last.origen, recorridoElegido.last.transporte)
-    }
+    tiempoTotal = tiempoTotal + recorridoElegido.calcularTiempo()
 
     return tiempoTotal
   }

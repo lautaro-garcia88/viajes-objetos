@@ -11,32 +11,33 @@ import ar.edu.tadp.viajes.Direccion
 import ar.edu.tadp.viajes.Viaje
 import ar.edu.tadp.viajes.Tramo
 import ar.edu.tadp.viajes.Colectivo
+import ar.edu.tadp.viajes.Recorrido
 
 class ViajesTest {
 
   @Test
   def unTramoTest() = {
     var unUsuario: Usuario = new Usuario(new Discapacitado(), MenorCosto)
-    var origen: Direccion = new Direccion("Balcarce", 50, "La Boca")
-    var destino: Direccion = new Direccion("Bolivar", 1, "La Boca")
+    var origen: Direccion = new Direccion("Balcarce", 50, "La Boca", false)
+    var destino: Direccion = new Direccion("Bolivar", 1, "La Boca", false)
     var unViaje: Viaje = new Viaje(origen, destino, unUsuario)
-    var recorrido: List[Tramo] = unViaje.armarRecorrido()
+    var recorrido: Recorrido = unViaje.armarRecorrido()
     var tiempo: Double = unViaje.calcularTiempo()
 
-    Assert.assertEquals(1, recorrido.length)
-    Assert.assertTrue(recorrido.head.transporte.isInstanceOf[Colectivo])
+    Assert.assertEquals(1, recorrido.tramos.length)
+    Assert.assertTrue(recorrido.tramos.head.transporte.isInstanceOf[Colectivo])
     Assert.assertEquals(30, tiempo)
   }
 
   @Test
   def dosTramosTest() = {
     var unUsuario: Usuario = new Usuario(new Discapacitado(), MenorCosto)
-    var origen: Direccion = new Direccion("Balcarce", 50, "La Boca")
-    var destino: Direccion = new Direccion("Bolivar", 1, "La Boca")
+    var origen: Direccion = new Direccion("Balcarce", 50, "La Boca", false)
+    var destino: Direccion = new Direccion("Bolivar", 1, "La Boca", false)
     var unViaje: Viaje = new Viaje(origen, destino, unUsuario)
-    var recorrido: List[Tramo] = unViaje.armarRecorrido()
+    var recorrido: Recorrido = unViaje.armarRecorrido()
 
-    Assert.assertEquals(1, recorrido.length)
-    Assert.assertTrue(recorrido.head.transporte.isInstanceOf[Colectivo])
+    Assert.assertEquals(1, recorrido.tramos.length)
+    Assert.assertTrue(recorrido.tramos.head.transporte.isInstanceOf[Colectivo])
   }
 }

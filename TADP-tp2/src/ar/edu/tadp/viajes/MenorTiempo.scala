@@ -1,10 +1,10 @@
 package ar.edu.tadp.viajes
 
 object MenorTiempo extends Criterio {
-  override def seleccionarRecorrido(origen: Direccion, destino: Direccion, recorridos: List[List[Tramo]], unUsuario: Usuario): List[Tramo] = {
+  override def seleccionarRecorrido(origen: Direccion, destino: Direccion, recorridos: List[Recorrido], unUsuario: Usuario): Recorrido = {
     var tiempoAnterior: Double = 0
     var tiempoActual: Double = 0
-    var recorridoSeleccionado: List[Tramo] = null
+    var recorridoSeleccionado: Recorrido = null
     var first: Boolean = true
 
     for (unRecorrido <- recorridos) {
@@ -24,18 +24,11 @@ object MenorTiempo extends Criterio {
     return recorridoSeleccionado
   }
 
-  private def calcularTiempo(origen: Direccion, destino: Direccion, unRecorrido: List[Tramo]): Double = {
-    var tiempoTotal: Double = ModuloTransporte.distanciaPie(origen, unRecorrido.head.origen)
+  private def calcularTiempo(origen: Direccion, destino: Direccion, unRecorrido: Recorrido): Double = {
+    var tiempoTotal: Double = ModuloTransporte.distanciaPie(origen, unRecorrido.tramos.head.origen)
 
-    tiempoTotal = tiempoTotal + ModuloTransporte.distanciaPie(unRecorrido.last.destino, destino)
-
-    for (unTramo <- unRecorrido) {
-      tiempoTotal = tiempoTotal + unTramo.calcularTiempo()
-    }
-
-    if (!unRecorrido.head.transporte.esIgual(unRecorrido.last.transporte)) {
-      tiempoTotal = tiempoTotal + unRecorrido.head.transporte.calcularTiempoCombinacion(unRecorrido.head.destino, unRecorrido.last.origen, unRecorrido.last.transporte)
-    }
+    tiempoTotal = tiempoTotal + ModuloTransporte.distanciaPie(unRecorrido.tramos.last.destino, destino)
+    tiempoTotal = tiempoTotal + unRecorrido.calcularTiempo()
 
     return tiempoTotal
   }

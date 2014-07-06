@@ -8,8 +8,8 @@ class Subte(var linea: String) extends Transporte {
     return distancia / 400 * 3
   }
 
-  override def calcularTarifa(origen: Direccion, destino: Direccion): Float = {
-    return 1
+  override def calcularTarifa(origen: Direccion, destino: Direccion): Double = {
+    return 4.5
   }
 
   override def esIgual(unTransporte: Transporte): Boolean = {

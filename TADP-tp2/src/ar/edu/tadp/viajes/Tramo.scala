@@ -4,4 +4,8 @@ class Tramo(var transporte: Transporte, var origen: Direccion, var destino: Dire
   def calcularTiempo(): Double = {
     return transporte.calcularTiempo(origen, destino)
   }
+
+  def calcularCosto(): Double = {
+    return transporte.calcularTarifa(origen, destino)
+  }
 }

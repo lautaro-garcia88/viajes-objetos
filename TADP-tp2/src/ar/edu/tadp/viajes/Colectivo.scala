@@ -7,8 +7,8 @@ class Colectivo(var linea: Int) extends Transporte {
     return distancia / 250
   }
 
-  override def calcularTarifa(origen: Direccion, destino: Direccion): Float = {
-    return 1
+  override def calcularTarifa(origen: Direccion, destino: Direccion): Double = {
+    return 2.5
   }
 
   override def esIgual(unTransporte: Transporte): Boolean = {
