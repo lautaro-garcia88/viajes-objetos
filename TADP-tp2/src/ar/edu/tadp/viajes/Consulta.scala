@@ -1,9 +1,9 @@
 package ar.edu.tadp.viajes
 
-class Consulta(var viajes: List[Viaje]) {
+class Consulta(var viajes: List[Viaje], var filtros: List[Filtro]) {
   def costoPromedioViajes(): Double = {
     var costoTotal: Double = 0
-    
+
     for (unViaje <- viajes) {
       costoTotal = costoTotal + unViaje.calcularCosto()
     }

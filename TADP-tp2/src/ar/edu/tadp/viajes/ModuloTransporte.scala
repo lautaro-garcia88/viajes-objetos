@@ -8,10 +8,10 @@ object ModuloTransporte {
     var unTransporteCerca: TransporteCerca = null
 
     if (unaDireccion.calle == "Balcarce") {
-      unColectivo = new Colectivo(5)
+      unColectivo = new Colectivo("5")
       dirCerca = new Direccion("Balcarce", 60, "La Boca", false)
     } else if (unaDireccion.calle == "Bolivar") {
-      unColectivo = new Colectivo(5)
+      unColectivo = new Colectivo("5")
       dirCerca = new Direccion("Bolivar", 100, "La Boca", false)
     }
 
@@ -25,7 +25,7 @@ object ModuloTransporte {
     return null
   }
 
-  def distanciaColectivo(linea: Int, dir1: Direccion, dir2: Direccion): Double = {
+  def distanciaColectivo(linea: String, dir1: Direccion, dir2: Direccion): Double = {
     return 0
   }
 

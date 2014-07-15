@@ -1,6 +1,6 @@
 package ar.edu.tadp.viajes
 
-class Colectivo(var linea: Int) extends Transporte {
+class Colectivo() extends Transporte(linea: String) {
   override def calcularTiempo(origen: Direccion, destino: Direccion): Double = {
     var distancia: Double = ModuloTransporte.distanciaColectivo(linea, origen, destino)
 
