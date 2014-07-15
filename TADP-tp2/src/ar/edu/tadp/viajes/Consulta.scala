@@ -4,6 +4,10 @@ class Consulta(var viajes: List[Viaje], var filtros: List[Filtro]) {
   def costoPromedioViajes(): Double = {
     var costoTotal: Double = 0
 
+    for (unFiltro <- filtros) {
+      viajes = aplicarFiltro(unFiltro)
+    }
+
     for (unViaje <- viajes) {
       costoTotal = costoTotal + unViaje.calcularCosto()
     }
@@ -32,5 +36,15 @@ class Consulta(var viajes: List[Viaje], var filtros: List[Filtro]) {
     }
 
     return costoTotal
+  }
+
+  private def aplicarFiltro(unFiltro: Filtro): List[Viaje] = {
+    var filtrados: List[Viaje] = List()
+
+    for (unViaje <- viajes) {
+      if (unFiltro.cumpleRequisito(unViaje)) filtrados = unViaje :: filtrados
+    }
+
+    return filtrados
   }
 }

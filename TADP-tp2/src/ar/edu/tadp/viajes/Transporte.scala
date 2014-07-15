@@ -1,6 +1,6 @@
 package ar.edu.tadp.viajes
 
-abstract class Transporte(var linea: String) {
+abstract class Transporte(var linea: String, var compania: String) {
   def calcularTarifa(origen: Direccion, destino: Direccion): Double
 
   def calcularTiempo(origen: Direccion, destino: Direccion): Double

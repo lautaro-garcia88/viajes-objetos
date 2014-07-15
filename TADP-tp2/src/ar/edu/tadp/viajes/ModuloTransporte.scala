@@ -8,10 +8,10 @@ object ModuloTransporte {
     var unTransporteCerca: TransporteCerca = null
 
     if (unaDireccion.calle == "Balcarce") {
-      unColectivo = new Colectivo("5")
+      unColectivo = new Colectivo("5", "Plaza")
       dirCerca = new Direccion("Balcarce", 60, "La Boca", false)
     } else if (unaDireccion.calle == "Bolivar") {
-      unColectivo = new Colectivo("5")
+      unColectivo = new Colectivo("5", "Plaza")
       dirCerca = new Direccion("Bolivar", 100, "La Boca", false)
     }
 

@@ -1,6 +1,6 @@
 package ar.edu.tadp.viajes
 
-class Tren(linea: String) extends Transporte(linea) {
+class Tren(linea: String, compania: String) extends Transporte(linea, compania) {
   override def calcularTiempo(origen: Direccion, destino: Direccion): Double = {
     //TODO: preguntar por la forma correcta.
     var distancia: Double = ModuloTransporte.distanciaPie(origen, destino)
