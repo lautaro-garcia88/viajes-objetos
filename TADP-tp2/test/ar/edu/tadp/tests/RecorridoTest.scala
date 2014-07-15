@@ -20,9 +20,9 @@ class RecorridoTest {
     var tramos: List[Tramo] = List()
     var origen: Direccion = new Direccion("calle 1", 20, "barrio 1", false)
     var destino: Direccion = new Direccion("calle 2", 20, "barrio 2", false)
-    var unTramo: Tramo = new Tramo(new Subte("A"), origen, destino)
+    var unTramo: Tramo = new Tramo(new Subte("A", "Metrovias"), origen, destino)
     tramos = unTramo :: tramos
-    unTramo = new Tramo(new Subte("B"), origen, destino)
+    unTramo = new Tramo(new Subte("B", "Metrovias"), origen, destino)
     tramos = unTramo :: tramos
     var unRecorrido = new Recorrido(tramos)
     var costo: Double = unRecorrido.calcularCosto()
@@ -38,9 +38,9 @@ class RecorridoTest {
     var tramos: List[Tramo] = List()
     var origen: Direccion = new Direccion("calle 1", 20, "barrio 1", false)
     var destino: Direccion = new Direccion("calle 2", 20, "barrio 2", false)
-    var unTramo: Tramo = new Tramo(new Colectivo(6), origen, destino)
+    var unTramo: Tramo = new Tramo(new Colectivo("6", "Plaza"), origen, destino)
     tramos = unTramo :: tramos
-    unTramo = new Tramo(new Colectivo(5), origen, destino)
+    unTramo = new Tramo(new Colectivo("5", "Plaza"), origen, destino)
     tramos = unTramo :: tramos
     var unRecorrido = new Recorrido(tramos)
     var actual: Double = unRecorrido.calcularCosto()
