@@ -18,6 +18,10 @@ class Consulta(var viajes: List[Viaje], var filtros: List[Filtro]) {
   def tiempoPromedioViajes(): Double = {
     var tiempoTotal: Double = 0
 
+    for (unFiltro <- filtros) {
+      viajes = aplicarFiltro(unFiltro)
+    }
+
     for (unViaje <- viajes) {
       tiempoTotal = tiempoTotal + unViaje.calcularTiempo()
     }
@@ -25,11 +29,19 @@ class Consulta(var viajes: List[Viaje], var filtros: List[Filtro]) {
   }
 
   def porcentajeUtilizacion(): Double = {
+    for (unFiltro <- filtros) {
+      viajes = aplicarFiltro(unFiltro)
+    }
+
     return viajes.length
   }
 
   def facturacionTotal(): Double = {
     var costoTotal: Double = 0
+
+    for (unFiltro <- filtros) {
+      viajes = aplicarFiltro(unFiltro)
+    }
 
     for (unViaje <- viajes) {
       costoTotal = costoTotal + unViaje.calcularCosto()
@@ -40,6 +52,10 @@ class Consulta(var viajes: List[Viaje], var filtros: List[Filtro]) {
 
   private def aplicarFiltro(unFiltro: Filtro): List[Viaje] = {
     var filtrados: List[Viaje] = List()
+
+    for (unFiltro <- filtros) {
+      viajes = aplicarFiltro(unFiltro)
+    }
 
     for (unViaje <- viajes) {
       if (unFiltro.cumpleRequisito(unViaje)) filtrados = unViaje :: filtrados

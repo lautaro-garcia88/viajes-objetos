@@ -26,7 +26,7 @@ class RecorridoTest {
     tramos = unTramo :: tramos
     var unRecorrido = new Recorrido(tramos)
     var costo: Double = unRecorrido.calcularCosto()
-    Assert.assertEquals(4.5, costo)
+    Assert.assertEquals(4.5, costo, 0.5)
     Assert.assertEquals(5, unRecorrido.calcularTiempo())
     Assert.assertEquals(true, unRecorrido.estaEnZonaTurismo())
     Assert.assertEquals(true, unRecorrido.estaEnZonaTrabajo())
