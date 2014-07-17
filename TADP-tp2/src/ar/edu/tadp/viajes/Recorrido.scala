@@ -19,7 +19,7 @@ class Recorrido(var tramos: List[Tramo]) {
     var costo: Double = 0
 
     if (tramos.length > 1) {
-      if (tramos.head.transporte.isInstanceOf[Subte] && tramos.last.transporte.isInstanceOf[Subte]) {
+      if (tramos.head.transporte.unAbono && tramos.last.transporte.unAbono) {
         costo = tramos.head.calcularCosto()
       }
     }

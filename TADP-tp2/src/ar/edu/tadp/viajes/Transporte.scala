@@ -8,4 +8,8 @@ abstract class Transporte(var linea: String, var compania: String) {
   def esIgual(unTransporte: Transporte): Boolean
 
   def calcularTiempoCombinacion(origen: Direccion, destino: Direccion, unTransporte: Transporte): Double
+
+  def unAbono(): Boolean = {
+    return false
+  }
 }

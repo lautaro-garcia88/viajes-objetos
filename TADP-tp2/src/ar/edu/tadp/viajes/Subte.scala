@@ -37,4 +37,8 @@ class Subte(linea: String, compania: String) extends Transporte(linea, compania)
 
     return tiempo
   }
+
+  override def unAbono(): Boolean = {
+    return true
+  }
 }
