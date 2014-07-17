@@ -5,7 +5,9 @@ abstract class Transporte(var linea: String, var compania: String) {
 
   def calcularTiempo(origen: Direccion, destino: Direccion): Double
 
-  def esIgual(unTransporte: Transporte): Boolean
+  def esIgual(unTransporte: Transporte): Boolean = {
+    return unTransporte.linea == this.linea && unTransporte.compania == this.compania
+  }
 
   def calcularTiempoCombinacion(origen: Direccion, destino: Direccion, unTransporte: Transporte): Double
 

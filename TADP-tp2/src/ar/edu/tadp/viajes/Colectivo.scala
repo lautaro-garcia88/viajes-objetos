@@ -11,16 +11,6 @@ class Colectivo(linea: String, compania: String) extends Transporte(linea, compa
     return 2.5
   }
 
-  override def esIgual(unTransporte: Transporte): Boolean = {
-    var retVal: Boolean = false
-
-    if (unTransporte.isInstanceOf[Colectivo]) {
-      retVal = unTransporte.asInstanceOf[Colectivo].linea == this.linea
-    }
-
-    return retVal
-  }
-
   override def calcularTiempoCombinacion(origen: Direccion, destino: Direccion, unTransporte: Transporte): Double = {
     var tiempo: Double = 0
     var distanciaEntreParadas: Double = 0

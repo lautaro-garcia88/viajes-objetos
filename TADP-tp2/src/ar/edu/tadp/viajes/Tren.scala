@@ -12,16 +12,6 @@ class Tren(linea: String, compania: String) extends Transporte(linea, compania) 
     return 1
   }
 
-  override def esIgual(unTransporte: Transporte): Boolean = {
-    var retVal: Boolean = false
-
-    if (unTransporte.isInstanceOf[Tren]) {
-      retVal = unTransporte.asInstanceOf[Tren].linea == this.linea
-    }
-
-    return retVal
-  }
-
   override def calcularTiempoCombinacion(origen: Direccion, destino: Direccion, unTransporte: Transporte): Double = {
     var tiempo: Double = 0
     var distanciaEntreParadas: Double = 0
